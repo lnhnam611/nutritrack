@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragmentLogin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:id="@+id/loginContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textFragmentTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Login"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Email Input -->
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@android:drawable/editbox_background"
+                android:drawableStart="@android:drawable/ic_dialog_email"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="12dp" />
+
+            <!-- Password Input -->
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:drawable/editbox_background"
+                android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="12dp" />
+
+            <!-- Login Button -->
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Login" />
+
+            <!-- Register Button -->
+            <Button
+                android:id="@+id/buttonRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:text="Register"
+                android:textColor="@android:color/white" />
+
+            <!-- Forgot Password Button -->
+            <Button
+                android:id="@+id/buttonForgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:text="Forgot Password?"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

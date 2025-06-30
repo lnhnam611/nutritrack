@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragmentsMainActivity.HomeFragment">
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragmentsMainActivity.HomeFragment"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/textMealEntryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add a Meal"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Meal Name Input -->
+            <EditText
+                android:id="@+id/editTextMealName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Meal name (e.g. Chicken breast)"
+                android:inputType="textCapWords"
+                android:background="@android:drawable/editbox_background"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Quantity Input -->
+            <EditText
+                android:id="@+id/editTextMealQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Quantity (e.g. 100g or 1 cup)"
+                android:inputType="text"
+                android:background="@android:drawable/editbox_background"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Add Button -->
+            <Button
+                android:id="@+id/buttonAddMeal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Meal"
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
