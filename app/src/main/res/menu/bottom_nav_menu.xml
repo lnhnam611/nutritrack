@@ -3,19 +3,27 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="Home" />
+        android:icon="@drawable/home_24dp"
+        android:title="Home"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
     <item
         android:id="@+id/nav_dashboard"
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:title="Dashboard" />
+        android:icon="@drawable/bar_chart_24dp"
+        android:title="Dashboard"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
     <item
         android:id="@+id/nav_history"
-        android:icon="@android:drawable/ic_menu_save"
-        android:title="History" />
+        android:icon="@drawable/history_24dp"
+        android:title="History"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
     <item
         android:id="@+id/nav_profile"
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:title="Profile" />
+        android:icon="@drawable/person_24dp"
+        android:title="Profile"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
 
 </menu>

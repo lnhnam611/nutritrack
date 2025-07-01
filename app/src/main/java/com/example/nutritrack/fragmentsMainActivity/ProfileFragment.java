@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Context;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.example.nutritrack.LoginPage;
@@ -57,7 +58,23 @@ public class ProfileFragment extends Fragment {
             buttonSave.setVisibility(View.VISIBLE);
         });
 
-        
+        buttonSave.setOnClickListener(v -> {
+
+            String newName = name.getText().toString().trim();
+            String newGender = gender.getText().toString().trim();
+            String newWeight = weight.getText().toString().trim();
+            String newHeight = height.getText().toString().trim();
+            String newAge = age.getText().toString().trim();
+
+            // Optional: validation and saving logic here
+
+            // Disable fields again
+            setFieldsEnabled(false);
+            buttonSave.setVisibility(View.GONE);
+
+            Toast.makeText(requireContext(), "Profile updated", Toast.LENGTH_SHORT).show();
+
+        });
 
 
 
@@ -65,7 +82,7 @@ public class ProfileFragment extends Fragment {
 
             SharedPreferences sharedPref = requireActivity().getSharedPreferences("NutriPrefs", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.remove("userId"); // or editor.clear() if you want to remove all
+            editor.remove("userId");
             editor.apply();
 
             // Navigate back to login
@@ -76,5 +93,13 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void setFieldsEnabled(boolean enabled) {
+        name.setEnabled(enabled);
+        gender.setEnabled(enabled);
+        weight.setEnabled(enabled);
+        height.setEnabled(enabled);
+        age.setEnabled(enabled);
     }
 }
