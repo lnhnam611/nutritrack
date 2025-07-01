@@ -35,22 +35,22 @@
                 android:id="@+id/editTextMealName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Meal name (e.g. Chicken breast)"
+                android:hint="Enter meal name (e.g. 2 eggs and toast)"
                 android:inputType="textCapWords"
                 android:background="@android:drawable/editbox_background"
                 android:padding="12dp"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Quantity Input -->
-            <EditText
-                android:id="@+id/editTextMealQuantity"
+
+            <!-- Check Calories Button -->
+            <Button
+                android:id="@+id/buttonCheckCalories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Quantity (e.g. 100g or 1 cup)"
-                android:inputType="text"
-                android:background="@android:drawable/editbox_background"
-                android:padding="12dp"
-                android:layout_marginBottom="24dp" />
+                android:text="Check Calories"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
 
             <!-- Add Button -->
             <Button
@@ -59,7 +59,19 @@
                 android:layout_height="wrap_content"
                 android:text="Add Meal"
                 android:backgroundTint="@android:color/holo_green_dark"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- TextView to display calories -->
+            <TextView
+                android:id="@+id/textViewCaloriesResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calories info will appear here."
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:padding="12dp"
+                android:background="#EFEFEF" />
 
         </LinearLayout>
     </ScrollView>

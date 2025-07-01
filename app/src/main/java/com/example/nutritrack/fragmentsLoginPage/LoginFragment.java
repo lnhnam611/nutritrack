@@ -1,11 +1,14 @@
 package com.example.nutritrack.fragmentsLoginPage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.content.Context;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,11 +44,15 @@ public class LoginFragment extends Fragment {
                 // Assume login is successful here (you can add real logic later)
                 String userId = "user123";  // You can dynamically get this after login success
 
+                SharedPreferences sharedPref = requireActivity().getSharedPreferences("NutriPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("userId", userId);
+                editor.apply();
+
                 // Prepare intent with bundle data
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 intent.putExtra("userId", userId);
                 startActivity(intent);
-
                 // Optionally finish LoginPage activity so user can't go back to login
                 getActivity().finish();
             }

@@ -1,6 +1,10 @@
 package com.example.nutritrack;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.content.Context;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +27,20 @@ public class LoginPage extends AppCompatActivity implements FragmentNavigationLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
+        // Check session
+        SharedPreferences sharedPref = getSharedPreferences("NutriPrefs", Context.MODE_PRIVATE);
+        String savedUserId = sharedPref.getString("userId", null);
+
+        if (savedUserId != null) {
+            // User already logged in
+            Intent intent = new Intent(LoginPage.this, MainActivity.class);
+            intent.putExtra("userId", savedUserId);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_login_page);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

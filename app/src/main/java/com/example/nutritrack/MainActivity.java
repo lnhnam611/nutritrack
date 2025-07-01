@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        userId = getIntent().getStringExtra("userId");
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+
 
         // Load default fragment
         loadFragment(new HomeFragment());
@@ -57,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadFragment(Fragment fragment) {
+
+        if (userId != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("userId", userId);
+            fragment.setArguments(bundle);
+        }
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.mainFragmentContainer, fragment)
