@@ -66,6 +66,35 @@
                 android:inputType="textPassword"
                 android:padding="12dp" />
 
+            <!-- Secret Question Spinner -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select a Secret Question"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:textColor="#000000" />
+
+            <Spinner
+                android:id="@+id/spinnerSecretQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:drawable/editbox_background"
+                android:padding="12dp" />
+
+            <!-- Secret Answer -->
+            <EditText
+                android:id="@+id/editTextSecretAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:drawable/editbox_background"
+                android:drawableStart="@android:drawable/ic_menu_help"
+                android:hint="Secret Answer"
+                android:inputType="text"
+                android:padding="12dp" />
+
             <!-- Register Button -->
             <Button
                 android:id="@+id/buttonRegister"

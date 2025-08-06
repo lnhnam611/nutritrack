@@ -30,9 +30,9 @@ public class LoginPage extends AppCompatActivity implements FragmentNavigationLi
 
         // Check session
         SharedPreferences sharedPref = getSharedPreferences("NutriPrefs", Context.MODE_PRIVATE);
-        String savedUserId = sharedPref.getString("userId", null);
+        int savedUserId = sharedPref.getInt("userId", 0);
 
-        if (savedUserId != null) {
+        if (savedUserId != 0) {
             // User already logged in
             Intent intent = new Intent(LoginPage.this, MainActivity.class);
             intent.putExtra("userId", savedUserId);

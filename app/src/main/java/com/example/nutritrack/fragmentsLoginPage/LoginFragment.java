@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Context;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -16,8 +18,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.nutritrack.MainActivity;
 import com.example.nutritrack.R;
+import com.example.nutritrack.room.AppDatabase;
+import com.example.nutritrack.room.entity.User;
 
 public class LoginFragment extends Fragment {
+
+    private EditText editTextEmail, editTextPassword;
+    private Button btnLogin, btnRegister, btnForgot;
+    private AppDatabase appDatabase;
 
     @Nullable
     @Override
@@ -25,10 +33,13 @@ public class LoginFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_login,container,false);
 
-        Button btnRegister = view.findViewById(R.id.buttonRegister);
-        Button btnForgot = view.findViewById(R.id.buttonForgotPassword);
-        Button btnLogin = view.findViewById(R.id.buttonLogin);
+        btnRegister = view.findViewById(R.id.buttonRegister);
+        btnForgot = view.findViewById(R.id.buttonForgotPassword);
+        btnLogin = view.findViewById(R.id.buttonLogin);
+        editTextEmail = view.findViewById(R.id.editTextEmail);
+        editTextPassword = view.findViewById(R.id.editTextPassword);
 
+        appDatabase = AppDatabase.getInstance(requireContext());
 
         btnRegister.setOnClickListener(v -> {
             ((FragmentNavigationListener) requireActivity()).navigateToRegister();
@@ -41,20 +52,40 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Assume login is successful here (you can add real logic later)
-                String userId = "user123";  // You can dynamically get this after login success
 
-                SharedPreferences sharedPref = requireActivity().getSharedPreferences("NutriPrefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("userId", userId);
-                editor.apply();
+                String email = editTextEmail.getText().toString().trim();
+                String password = editTextPassword.getText().toString();
 
-                // Prepare intent with bundle data
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("userId", userId);
-                startActivity(intent);
-                // Optionally finish LoginPage activity so user can't go back to login
-                getActivity().finish();
+                if (email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(getContext(), "Please enter email and password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // Run DB query in background thread
+                new Thread(() -> {
+                    User user = appDatabase.userDao().getUserByEmail(email);
+                    if (user != null && user.password.equals(password)) {
+                        // Success: save userId and navigate
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
+
+                            // Save userId to SharedPreferences
+                            SharedPreferences sharedPref = requireActivity().getSharedPreferences("NutriPrefs", Context.MODE_PRIVATE);
+                            sharedPref.edit().putInt("userId", user.id).apply();
+
+                            // Navigate to MainActivity
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            intent.putExtra("userId", user.id);
+                            startActivity(intent);
+
+                            requireActivity().finish();
+                        });
+                    } else {
+                        // Failed login
+                        requireActivity().runOnUiThread(() -> {
+                            Toast.makeText(getContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                }).start();
             }
         });
 
