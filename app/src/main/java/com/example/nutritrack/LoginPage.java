@@ -29,8 +29,25 @@ public class LoginPage extends AppCompatActivity implements FragmentNavigationLi
         EdgeToEdge.enable(this);
 
         // Check session
+//        SharedPreferences sharedPref = getSharedPreferences("NutriPrefs", Context.MODE_PRIVATE);
+//        int savedUserId = sharedPref.getInt("userId", 0);
+        // Check session
         SharedPreferences sharedPref = getSharedPreferences("NutriPrefs", Context.MODE_PRIVATE);
-        int savedUserId = sharedPref.getInt("userId", 0);
+        int savedUserId = 0;
+
+        try {
+            // Try to get as int
+            savedUserId = sharedPref.getInt("userId", 0);
+        } catch (ClassCastException e) {
+            // If saved as String, parse it
+            String userIdStr = sharedPref.getString("userId", null);
+            if (userIdStr != null) {
+                try {
+                    savedUserId = Integer.parseInt(userIdStr);
+                } catch (NumberFormatException ignored) {
+                }
+            }
+        }
 
         if (savedUserId != 0) {
             // User already logged in
