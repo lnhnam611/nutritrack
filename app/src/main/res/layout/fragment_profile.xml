@@ -123,6 +123,23 @@
                 android:padding="12dp"
                 android:layout_marginBottom="24dp" />
 
+            <!-- Age -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Expect Daily Calories"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/editTextExpectCalories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your expected calories"
+                android:inputType="number"
+                android:enabled="false"
+                android:background="@android:drawable/editbox_background"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp" />
+
             <!-- Edit Button -->
             <Button
                 android:id="@+id/buttonEditProfile"

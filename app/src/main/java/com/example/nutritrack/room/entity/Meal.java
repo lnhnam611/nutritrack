@@ -3,6 +3,7 @@ package com.example.nutritrack.room.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
@@ -42,6 +43,9 @@ public class Meal {
         this.foodName = foodName;
         this.totalCalories = totalCalories;
     }
+
+    @Ignore
+    public Meal(){}
 
 
 }

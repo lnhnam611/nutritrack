@@ -27,13 +27,13 @@ import com.example.nutritrack.room.entity.User;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
+
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
 
     Button logoutButton;
-    private EditText name, email, weight, height, age;
+    private EditText name, email, weight, height, age, expectedCalories;
     private Spinner gender;
     private Button buttonEdit, buttonSave;
 
@@ -55,6 +55,7 @@ public class ProfileFragment extends Fragment {
         weight = view.findViewById(R.id.editTextProfileWeight);
         height = view.findViewById(R.id.editTextProfileHeight);
         age = view.findViewById(R.id.editTextProfileAge);
+        expectedCalories = view.findViewById(R.id.editTextExpectCalories);
         buttonEdit = view.findViewById(R.id.buttonEditProfile);
         buttonSave = view.findViewById(R.id.buttonSaveProfile);
         logoutButton = view.findViewById(R.id.buttonLogout);
@@ -75,6 +76,13 @@ public class ProfileFragment extends Fragment {
         // Load user data from Room
         SharedPreferences sharedPref = requireActivity().getSharedPreferences("NutriPrefs", Context.MODE_PRIVATE);
         int userId = sharedPref.getInt("userId", -1);
+        String expectedCaolories = sharedPref.getString("calories","0");
+        if (!expectedCaolories.equals("0")) {
+            expectedCalories.setText(expectedCaolories);
+        } else {
+            expectedCalories.setText("");
+        }
+
 
         if (userId == -1) {
             Toast.makeText(getContext(), "User not logged in", Toast.LENGTH_SHORT).show();
@@ -117,6 +125,8 @@ public class ProfileFragment extends Fragment {
                 String newWeightStr = weight.getText().toString().trim();
                 String newHeightStr = height.getText().toString().trim();
                 String newAgeStr = age.getText().toString().trim();
+                String expecteCalories = expectedCalories.getText().toString().trim();
+                sharedPref.edit().putString("calories", expecteCalories).apply();
 
                 double newWeight = newWeightStr.isEmpty() ? 0 : Double.parseDouble(newWeightStr);
                 double newHeight = newHeightStr.isEmpty() ? 0 : Double.parseDouble(newHeightStr);
@@ -137,7 +147,6 @@ public class ProfileFragment extends Fragment {
                 }
             }).start();
 
-
         });
 
         logoutButton.setOnClickListener(v -> {
@@ -154,5 +163,6 @@ public class ProfileFragment extends Fragment {
         weight.setEnabled(enabled);
         height.setEnabled(enabled);
         age.setEnabled(enabled);
+        expectedCalories.setEnabled(enabled);
     }
 }
